@@ -1,0 +1,70 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    gap: 20px;
+    padding: 30px;
+}
+
+.main .newTodoForm {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px;
+    gap: 20px;
+} 
+
+.inactive {
+    display: none !important;
+}
+
+.todo {
+    padding: 20px;
+    border: 1px solid black;
+    width: 250px;
+}
+
+.todos-container {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.editTodo {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    gap: 20px;
+}
+
+.editTodoContainer {
+    padding: 30px;
+}
+
+#input:invalid {
+    padding: 300px;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+}
+
+.projectContainer {
+    padding-bottom: 20px;
+    max-width: 500px;
+    border-bottom: 1px solid black;
+}
+
+.projectContainer .projectTodos {
+    padding: 20px;
+}

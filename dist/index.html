@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <input type="button" value="New Book" class="newBookBtn">
+            <li>Home</li>
+            <li>Today</li>
+            <li>This week</li>
+            <li class="navProjects">Projects</li>
+        </ul>
+    </nav>
+
+    <div class="main">
+        <div class="newTodoForm inactive">
+            <input type="text" name="title" id="title" placeholder="Title" required>
+            <input type="text" name="description" id="description" placeholder="Description">
+            <input type="date" name="duedate" id="duedate" placeholder="Duedate">
+            <!-- <input type="text" name="priority" id="priority" placeholder="Priority"> -->
+            <select name="priority" id="priority">
+                <option value="low">Low</option>
+                <option selected value="mid">Mid</option>
+                <option value="high">High</option>
+            </select>
+            <input type="text" name="project" id="project" placeholder="Project">
+            <input type="submit" value="Add" class="addBookBtn">
+            <input type="button" value="Cancel" class="closeTodoForm">
+        </div>
+        <div class="editTodoContainer"></div>
+        <div id="content">
+            <div class="projectContainer">
+                <div> Project 1</div>
+                <div class="projectTodos">
+                    <div>Todo 1</div>
+                    <div>Todo 2</div>
+                    <div>Todo 3</div>
+                </div>
+            </div>
+            <div class="projectContainer">
+                <div class="projectTitle">Project 2</div>
+                <div class="projectTodos">
+                    <div>Todo 1</div>
+                    <div>Todo 2</div>
+                    <div>Todo 3</div>
+                </div>
+            </div>
+        </div>
+        <div class="todos-container">
+            <!-- <div class="todo">
+                <p>Title 1</p>
+                <p>Due: 20.20.2022</p>
+                <input type="button" value="Edit">
+                <input type="button" value="Delete">
+            </div> -->
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
