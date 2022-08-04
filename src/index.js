@@ -87,10 +87,10 @@ export const app = (() => {
     }
     
     function init() {
-        const dummyTodo1 = new Todo("Titel1eins", "Beschreibung 1", "2022-09-02", "Wichtig", "Schule2")
-        const dummyTodo2 = new Todo("Titel1eins", "Beschreibung 1", "2022-09-02", "Wichtig1", "Schule33")
-        const dummyTodo3 = new Todo("Titel1eins", "Beschreibung 1", "2022-09-02", "Wichtig2", "Schule55")
-        const dummyTodo4 = new Todo("Titel1eins", "Beschreibung 1", "2022-09-02", "Wichtig2", "Schule55")
+        const dummyTodo1 = new Todo("Titel1", "Beschreibung 1", "2022-09-02", "Wichtig", "Project1")
+        const dummyTodo2 = new Todo("Titel2", "Beschreibung 1", "2022-09-02", "Wichtig1", "Project2")
+        const dummyTodo3 = new Todo("Titel3eins", "Beschreibung 1", "2022-09-02", "Wichtig2", "Project3")
+        const dummyTodo4 = new Todo("Titel4eins", "Beschreibung 1", "2022-09-02", "Wichtig2", "Project1")
         todos.push(dummyTodo1)
         todos.push(dummyTodo2)
         todos.push(dummyTodo3)

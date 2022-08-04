@@ -73,26 +73,38 @@ const UI = (() => {
     }
 
     function loadProjectsPage(todos) {
-        content.innerHTML = "";
+        content.innerHTML = "";   
         let todosWithSameProject;
-        todos.forEach(todo => {
-            console.log(todo)
-            const projectContainer = document.createElement("div");
-            projectContainer.classList.add("projectContainer")
-            const projectTitle = document.createElement("div");
-            projectTitle.textContent = todo.project;
-            projectContainer.appendChild(projectTitle);
 
-            todosWithSameProject += todos.filter(ele => {
-                if(todo.project === ele.project) return ele;
+        const projectNames = todos.map((todo) => {
+            return todo.project;
+        })
+
+        let uniqProjets = [...new Set(projectNames)];
+
+        uniqProjets.forEach(project => {
+            let todosWithSameProject = todos.filter(todo => {
+                if(todo.project === project) {
+                    return todo
+                }
             })
+
+            const projectContainer = document.createElement("div");
+            projectContainer.classList.add("projectContainer");
+            
+            const projectTitle = document.createElement("div");
+            projectTitle.textContent = project;
+            projectContainer.appendChild(projectTitle)
+
+            todosWithSameProject.forEach(todo => {
+                const projectTodo = document.createElement("div");
+                projectTodo.textContent = todo.title;
+                projectTodo.classList.add("projectTodos")
+                projectContainer.appendChild(projectTodo)
+            }) 
 
             content.appendChild(projectContainer)
         })
-
-        console.log(todosWithSameProject)
-        
-
 
     }
 
