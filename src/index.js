@@ -40,6 +40,8 @@ export const app = (() => {
     const projectInput = document.querySelector("#project")
 
     const navProjects = document.querySelector(".navProjects");
+    const navHome = document.querySelector(".navHome");
+    const navToday = document.querySelector(".navToday");
 
     // add events
     newBookBtn.addEventListener("click", UI.openNewTodoForm )
@@ -47,6 +49,8 @@ export const app = (() => {
     todosContainer.addEventListener("click", bindEvent.todo)
     editTodoContainer.addEventListener("click", bindEvent.editTodo)
     navProjects.addEventListener("click", showAllProjects)
+    navHome.addEventListener("click", loadHome);
+    navToday.addEventListener("click", loadToday)
 
 
     // functions
@@ -87,10 +91,10 @@ export const app = (() => {
     }
     
     function init() {
-        const dummyTodo1 = new Todo("Titel1", "Beschreibung 1", "2022-09-02", "Wichtig", "Project1")
-        const dummyTodo2 = new Todo("Titel2", "Beschreibung 1", "2022-09-02", "Wichtig1", "Project2")
-        const dummyTodo3 = new Todo("Titel3eins", "Beschreibung 1", "2022-09-02", "Wichtig2", "Project3")
-        const dummyTodo4 = new Todo("Titel4eins", "Beschreibung 1", "2022-09-02", "Wichtig2", "Project1")
+        const dummyTodo1 = new Todo("Titel1", "Beschreibung 1", new Date(1995,11,17), "Wichtig", "Project1")
+        const dummyTodo2 = new Todo("Titel2", "Beschreibung 1", new Date(2022, 7, 4), "Wichtig1", "Project2")
+        const dummyTodo3 = new Todo("Titel3eins", "Beschreibung 1", new Date(1995,11,17), "Wichtig2", "Project3")
+        const dummyTodo4 = new Todo("Titel4eins", "Beschreibunsg 1", new Date(1995,11,17), "Wichtig2", "Project1")
         todos.push(dummyTodo1)
         todos.push(dummyTodo2)
         todos.push(dummyTodo3)
@@ -103,6 +107,17 @@ export const app = (() => {
         UI.clearScreen();
         UI.loadProjectsPage(todos)
     }
+
+    function loadHome() {
+        UI.clearScreen();
+        UI.loadHome(todos);
+    }
+
+    function loadToday() {
+        UI.clearScreen();
+        UI.loadToday(todos);
+    }
+
 
     init();
     

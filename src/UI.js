@@ -1,4 +1,7 @@
 import { app } from './index.js'
+import isToday from 'date-fns/isToday'
+import { format } from 'date-fns'
+
 
 const UI = (() => {
     
@@ -41,6 +44,27 @@ const UI = (() => {
             `
             index++;
         });
+    }
+
+    function loadToday(todos) {
+        todosContainer.innerHTML = "";
+        let index = 0;
+        let todayTodos = todos.filter((todo) => {
+            console.log(isToday(todo.dueDate));
+        })
+        
+        // todo => {
+        //     todosContainer.innerHTML +=
+        //     `
+        //     <div class="todo" data-id="${index}">
+        //         <p>${todo.title}</p>
+        //         <p>Due: ${todo.dueDate}</p>
+        //         <input type="button" value="Edit" class="editTodoBtn">
+        //         <input type="button" value="Delete" class="deleteTodoBtn">
+        //     </div>
+        //     `
+        //     index++;
+        
     }
 
     function hideTodos() {
@@ -108,14 +132,16 @@ const UI = (() => {
 
     }
 
+
     function clearScreen() {
         closeNewTodoForm();
         closeEditTodo();
         hideTodos();
+        content.innerHTML = "";
     }
 
 
-    return { loadProjectsPage, clearScreen, openNewTodoForm, closeNewTodoForm, loadHome, openEditTodo, closeEditTodo }
+    return { loadToday, loadProjectsPage, clearScreen, openNewTodoForm, closeNewTodoForm, loadHome, openEditTodo, closeEditTodo }
 })();
 
 export { UI }
