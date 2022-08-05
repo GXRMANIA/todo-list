@@ -1,32 +1,14 @@
 import { UI } from './UI.js';
 import { bindEvent } from './bindEvent';
+import { storage } from './storage';
 
-const storage = (() => {
 
-    function saveTodos(todos) {
-        localStorage.setItem("todos", JSON.stringify(todos))
-    }
-
-    function loadTodos() {
-        let res = [];
-        let loadedTodos = JSON.parse(localStorage.getItem("todos"));
-        loadedTodos.forEach(element => {
-            let newTodo = new Todo(element.title, element.description, element.dueDate, element.priority, element.project);
-            res.push(newTodo)
-        });
-        return res;
-    }
-
-    return { saveTodos, loadTodos }
-})();
-
-function Todo(title, description, dueDate, priority, project) {
+export function Todo(title, description, dueDate, priority, project) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.project = project; 
-
 }    
 
 Todo.prototype.updateTodo = function(newTitle, newDescription, newDueDate, newPriority, newProject) {
@@ -89,13 +71,12 @@ export const app = (() => {
         todos.push(newTodo)
         storage.saveTodos(todos)
         UI.loadHome(todos)
-        UI.closeNewTodoForm();
     }
     
     function deleteTodo(index) {
         todos.splice(index, 1);
         UI.loadHome(todos);
-        storage.saveTodos(todos)
+        storage.saveTodos(todos);
     }
 
     function editTodo(index) {
