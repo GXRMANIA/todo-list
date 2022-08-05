@@ -1,6 +1,18 @@
 import { UI } from './UI.js';
 import { bindEvent } from './bindEvent';
-import { format } from 'date-fns'
+
+const storage = (() => {
+
+    function saveTodos(todos) {
+        localStorage.setItem("todos", JSON.stringify(todos))
+    }
+
+    function loadTodos() {
+        return JSON.parse(localStorage.getItem("todos"))
+    }
+
+    return { saveTodos, loadTodos }
+})();
 
 function Todo(title, description, dueDate, priority, project) {
     this.title = title;
@@ -18,8 +30,6 @@ Todo.prototype.updateTodo = function(newTitle, newDescription, newDueDate, newPr
     this.priority = newPriority;
     this.project = newProject;
 }
-
-
 
 
 export const app = (() => {
@@ -49,10 +59,18 @@ export const app = (() => {
     newTodoForm.addEventListener("click", bindEvent.newTodoForm)
     todosContainer.addEventListener("click", bindEvent.todo)
     editTodoContainer.addEventListener("click", bindEvent.editTodo)
-    navProjects.addEventListener("click", showAllProjects)
-    navHome.addEventListener("click", loadHome);
-    navToday.addEventListener("click", loadToday)
-    navWeek.addEventListener("click", loadWeek)
+    navProjects.addEventListener("click", () => {
+        UI.loadProjectsPage(todos);
+    })
+    navHome.addEventListener("click", () => {
+        UI.loadHome(todos);
+    });
+    navToday.addEventListener("click",  () => {
+        UI.loadToday(todos)
+    })
+    navWeek.addEventListener("click", () => {
+        UI.loadWeek(todos)
+    })
 
 
     // functions
@@ -63,17 +81,15 @@ export const app = (() => {
         }
         const newTodo = new Todo(titleInput.value, descriptionInput.value, duedateInput.value, priorityInput.value, projectInput.value);
         todos.push(newTodo)
+        storage.saveTodos(todos)
         UI.loadHome(todos)
         UI.closeNewTodoForm();
-    }
-
-    function closeTodoForm() {
-        UI.loadHome(todos)
     }
 
     function deleteTodo(index) {
         todos.splice(index, 1);
         UI.loadHome(todos);
+        storage.saveTodos(todos)
     }
 
     function editTodo(index) {
@@ -90,45 +106,20 @@ export const app = (() => {
         todos[index].updateTodo(newTitle, newDescription, newDueDate, newPriority, newProject);
         UI.closeEditTodo();
         UI.loadHome(todos);
+        storage.saveTodos(todos)
+
     }
-    
+  
     function init() {
-        const dummyTodo1 = new Todo("Titel1", "Beschreibung 1", "1999-08-04","Wichtig", "Project1")
-        const dummyTodo2 = new Todo("Titel2", "Beschreibung 1", "1999-08-04", "Wichtig1", "Project2")
-        const dummyTodo3 = new Todo("Titel3eins", "Beschreibung 1", "2022-08-05", "Wichtig2", "Project3")
-        const dummyTodo4 = new Todo("Titel4eins", "Beschreibunsg 1", "1999-08-04", "Wichtig2", "Project1")
-        todos.push(dummyTodo1)
-        todos.push(dummyTodo2)
-        todos.push(dummyTodo3)
-        todos.push(dummyTodo4)
-        
-        UI.loadHome(todos);
-    }
-
-    function showAllProjects() {
-        UI.clearScreen();
-        UI.loadProjectsPage(todos)
-    }
-
-    function loadHome() {
-        UI.clearScreen();
-        UI.loadHome(todos);
-    }
-
-    function loadToday() {
-        UI.clearScreen();
-        UI.loadToday(todos);
-    }
-
-    function loadWeek() {
-        UI.clearScreen();
-        UI.loadWeek(todos)
+        todos = storage.loadTodos();
+        UI.loadHome(todos)
     }
 
     init();
-    
 
-    return {addTodo, deleteTodo, editTodo, cancelEditTodo, saveEditTodo, closeTodoForm}
+
+    return {addTodo, deleteTodo, editTodo, cancelEditTodo, saveEditTodo}
 
 })();
+
 

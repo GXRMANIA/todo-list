@@ -24,14 +24,12 @@ const UI = (() => {
             if(ele.type !== "text") return;
             ele.value = "";
         })
-        newTodoForm.classList.add("inactive");
-        app.closeTodoForm();
-        
+        newTodoForm.classList.add("inactive"); 
         
     }
 
     function loadHome(todos) {
-        todosContainer.innerHTML = "";
+        clearScreen();
         let index = 0;
         todos.forEach(todo => {
             todosContainer.innerHTML +=
@@ -48,6 +46,7 @@ const UI = (() => {
     }
 
     function loadToday(todos) {
+        clearScreen();
         let index = 0;
         let todayTodos = todos.filter((todo) => {
             if(isToday(Date.parse(todo.dueDate))) {
@@ -70,6 +69,7 @@ const UI = (() => {
     }
 
     function loadWeek(todos) {
+        clearScreen();
         let index = 0;
         let weekTodos = todos.filter((todo) => {
             if(isThisWeek(Date.parse(todo.dueDate))) {
@@ -89,9 +89,7 @@ const UI = (() => {
             index++;
         });
 
-    }
-        
-        
+    }     
 
     function hideTodos() {
         todosContainer.innerHTML = "";
@@ -123,7 +121,7 @@ const UI = (() => {
     }
 
     function loadProjectsPage(todos) {
-        content.innerHTML = "";   
+        clearScreen();   
         let todosWithSameProject;
 
         const projectNames = todos.map((todo) => {
