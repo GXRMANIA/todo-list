@@ -15,7 +15,7 @@ export const bindEvent = (() => {
 
     function todo(e) {
         const eventClass = e.target.classList[0];
-        let index = e.target.parentNode.dataset.id;
+        let index = e.target.parentNode.parentNode.dataset.id;
 
         if(eventClass === "deleteTodoBtn") {
             app.deleteTodo(index)

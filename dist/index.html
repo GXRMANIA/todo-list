@@ -11,7 +11,7 @@
 
     <nav>
         <ul>
-            <input type="button" value="New Book" class="newBookBtn">
+            <!-- <input type="button" value="New Book" class="newBookBtn"> -->
             <li class="navHome">Home</li>
             <li class="navToday">Today</li>
             <li class="navWeek">This week</li>
@@ -20,18 +20,43 @@
     </nav>
 
     <div class="main">
-        <div class="newTodoForm inactive">
-            <input type="text" name="title" id="title" placeholder="Title" required>
-            <input type="text" name="description" id="description" placeholder="Description">
-            <input type="date" name="duedate" id="duedate" placeholder="Duedate">
-            <select name="priority" id="priority">
-                <option value="low">Low</option>
-                <option selected value="mid">Mid</option>
-                <option value="high">High</option>
-            </select>
-            <input type="text" name="project" id="project" placeholder="Project">
-            <input type="submit" value="Add" class="addBookBtn">
-            <input type="button" value="Cancel" class="closeTodoForm">
+        <div class="newTodoForm">
+            <div>
+                <label for="text">Title(*): </label>
+                <input type="text" name="title" id="title" placeholder="Title" required>
+            </div>
+            <div>
+                <label for="text">Description: </label>
+                <input type="text" name="description" id="description" placeholder="Description">
+            </div>
+            <div>
+                <label for="text">Due Date: </label>
+                <input type="date" name="duedate" id="duedate" placeholder="Duedate">
+            </div>
+            <div>
+                <label for="text">Priority: </label>
+                <select name="priority" id="priority">
+                    <option value="low">Low</option>
+                    <option selected value="mid">Mid</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <div>
+                <label for="text">Project: </label>
+                <input type="text" name="project" id="project" placeholder="Project">
+            </div>
+            <div>
+                <input type="submit" value="Add" class="addBookBtn">
+                <input type="button" value="Cancel" class="closeTodoForm">
+            </div>
+        </div>
+        <div class="todos-container">
+            <!-- <div class="todo">
+                <p>Title 1</p>
+                <p>Due: 20.20.2022</p>
+                <input type="button" value="Edit">
+                <input type="button" value="Delete">
+            </div> -->
         </div>
         <div class="editTodoContainer"></div>
         <div id="content">
@@ -44,15 +69,11 @@
                 </div>
             </div> -->
         </div>
-        <div class="todos-container">
-            <!-- <div class="todo">
-                <p>Title 1</p>
-                <p>Due: 20.20.2022</p>
-                <input type="button" value="Edit">
-                <input type="button" value="Delete">
-            </div> -->
-        </div>
+        
+        
     </div>
+
+    <input type="button" value="New Todo" class="newBookBtn">
 
     <script src="main.js"></script>
 </body>

@@ -8,7 +8,13 @@ const storage = (() => {
     }
 
     function loadTodos() {
-        return JSON.parse(localStorage.getItem("todos"))
+        let res = [];
+        let loadedTodos = JSON.parse(localStorage.getItem("todos"));
+        loadedTodos.forEach(element => {
+            let newTodo = new Todo(element.title, element.description, element.dueDate, element.priority, element.project);
+            res.push(newTodo)
+        });
+        return res;
     }
 
     return { saveTodos, loadTodos }
@@ -85,7 +91,7 @@ export const app = (() => {
         UI.loadHome(todos)
         UI.closeNewTodoForm();
     }
-
+    
     function deleteTodo(index) {
         todos.splice(index, 1);
         UI.loadHome(todos);
@@ -114,6 +120,8 @@ export const app = (() => {
         todos = storage.loadTodos();
         UI.loadHome(todos)
     }
+
+
 
     init();
 

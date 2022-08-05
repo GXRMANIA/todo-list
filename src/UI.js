@@ -12,10 +12,16 @@ const UI = (() => {
     const editTodoContainer = document.querySelector(".editTodoContainer")
     const content = document.querySelector("#content");
 
+    const navProjects = document.querySelector(".navProjects");
+    const navHome = document.querySelector(".navHome");
+    const navToday = document.querySelector(".navToday");
+    const navWeek = document.querySelector(".navWeek");
+
 
     function openNewTodoForm() {
         newTodoForm.classList.remove("inactive");
         editTodoContainer.innerHTML = "";
+        todosContainer.innerHTML = "";
     }
 
     function closeNewTodoForm() {
@@ -29,6 +35,10 @@ const UI = (() => {
     }
 
     function loadHome(todos) {
+        navHome.classList.add("selected")
+        navToday.classList.remove("selected")
+        navWeek.classList.remove("selected")
+        navProjects.classList.remove("selected")
         clearScreen();
         let index = 0;
         todos.forEach(todo => {
@@ -37,8 +47,10 @@ const UI = (() => {
             <div class="todo" data-id="${index}">
                 <p>${todo.title}</p>
                 <p>Due: ${todo.dueDate}</p>
-                <input type="button" value="Edit" class="editTodoBtn">
-                <input type="button" value="Delete" class="deleteTodoBtn">
+                <div>
+                    <input type="button" value="Edit" class="editTodoBtn">
+                    <input type="button" value="Delete" class="deleteTodoBtn">
+                </div>
             </div>
             `
             index++;
@@ -46,6 +58,10 @@ const UI = (() => {
     }
 
     function loadToday(todos) {
+        navToday.classList.add("selected")
+        navHome.classList.remove("selected")
+        navWeek.classList.remove("selected")
+        navProjects.classList.remove("selected")
         clearScreen();
         let index = 0;
         let todayTodos = todos.filter((todo) => {
@@ -59,8 +75,10 @@ const UI = (() => {
             <div class="todo" data-id="${index}">
                 <p>${todo.title}</p>
                 <p>Due: ${todo.dueDate}</p>
-                <input type="button" value="Edit" class="editTodoBtn">
-                <input type="button" value="Delete" class="deleteTodoBtn">
+                <div>
+                    <input type="button" value="Edit" class="editTodoBtn">
+                    <input type="button" value="Delete" class="deleteTodoBtn">
+                </div>
             </div>
             `
             index++;
@@ -69,6 +87,10 @@ const UI = (() => {
     }
 
     function loadWeek(todos) {
+        navWeek.classList.add("selected")
+        navToday.classList.remove("selected")
+        navHome.classList.remove("selected")
+        navProjects.classList.remove("selected")
         clearScreen();
         let index = 0;
         let weekTodos = todos.filter((todo) => {
@@ -82,8 +104,10 @@ const UI = (() => {
             <div class="todo" data-id="${index}">
                 <p>${todo.title}</p>
                 <p>Due: ${todo.dueDate}</p>
-                <input type="button" value="Edit" class="editTodoBtn">
-                <input type="button" value="Delete" class="deleteTodoBtn">
+                <div>
+                    <input type="button" value="Edit" class="editTodoBtn">
+                    <input type="button" value="Delete" class="deleteTodoBtn">
+                </div>
             </div>
             `
             index++;
@@ -121,6 +145,10 @@ const UI = (() => {
     }
 
     function loadProjectsPage(todos) {
+        navProjects.classList.add("selected")
+        navToday.classList.remove("selected")
+        navHome.classList.remove("selected")
+        navWeek.classList.remove("selected")
         clearScreen();   
         let todosWithSameProject;
 
@@ -145,7 +173,7 @@ const UI = (() => {
             projectContainer.appendChild(projectTitle)
 
             todosWithSameProject.forEach(todo => {
-                const projectTodo = document.createElement("div");
+                const projectTodo = document.createElement("li");
                 projectTodo.textContent = todo.title;
                 projectTodo.classList.add("projectTodos")
                 projectContainer.appendChild(projectTodo)
