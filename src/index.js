@@ -1,6 +1,6 @@
 import { UI } from './UI.js';
 import { bindEvent } from './bindEvent';
-
+import { format } from 'date-fns'
 
 function Todo(title, description, dueDate, priority, project) {
     this.title = title;
@@ -42,6 +42,7 @@ export const app = (() => {
     const navProjects = document.querySelector(".navProjects");
     const navHome = document.querySelector(".navHome");
     const navToday = document.querySelector(".navToday");
+    const navWeek = document.querySelector(".navWeek");
 
     // add events
     newBookBtn.addEventListener("click", UI.openNewTodoForm )
@@ -51,6 +52,7 @@ export const app = (() => {
     navProjects.addEventListener("click", showAllProjects)
     navHome.addEventListener("click", loadHome);
     navToday.addEventListener("click", loadToday)
+    navWeek.addEventListener("click", loadWeek)
 
 
     // functions
@@ -91,10 +93,10 @@ export const app = (() => {
     }
     
     function init() {
-        const dummyTodo1 = new Todo("Titel1", "Beschreibung 1", new Date(1995,11,17), "Wichtig", "Project1")
-        const dummyTodo2 = new Todo("Titel2", "Beschreibung 1", new Date(2022, 7, 4), "Wichtig1", "Project2")
-        const dummyTodo3 = new Todo("Titel3eins", "Beschreibung 1", new Date(1995,11,17), "Wichtig2", "Project3")
-        const dummyTodo4 = new Todo("Titel4eins", "Beschreibunsg 1", new Date(1995,11,17), "Wichtig2", "Project1")
+        const dummyTodo1 = new Todo("Titel1", "Beschreibung 1", "1999-08-04","Wichtig", "Project1")
+        const dummyTodo2 = new Todo("Titel2", "Beschreibung 1", "1999-08-04", "Wichtig1", "Project2")
+        const dummyTodo3 = new Todo("Titel3eins", "Beschreibung 1", "2022-08-05", "Wichtig2", "Project3")
+        const dummyTodo4 = new Todo("Titel4eins", "Beschreibunsg 1", "1999-08-04", "Wichtig2", "Project1")
         todos.push(dummyTodo1)
         todos.push(dummyTodo2)
         todos.push(dummyTodo3)
@@ -118,6 +120,10 @@ export const app = (() => {
         UI.loadToday(todos);
     }
 
+    function loadWeek() {
+        UI.clearScreen();
+        UI.loadWeek(todos)
+    }
 
     init();
     

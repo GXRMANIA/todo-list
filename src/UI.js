@@ -1,6 +1,7 @@
 import { app } from './index.js'
 import isToday from 'date-fns/isToday'
-import { format } from 'date-fns'
+import isThisWeek from 'date-fns/isThisWeek'
+
 
 
 const UI = (() => {
@@ -47,25 +48,50 @@ const UI = (() => {
     }
 
     function loadToday(todos) {
-        todosContainer.innerHTML = "";
         let index = 0;
         let todayTodos = todos.filter((todo) => {
-            console.log(isToday(todo.dueDate));
+            if(isToday(Date.parse(todo.dueDate))) {
+                return todo;
+            }
         })
-        
-        // todo => {
-        //     todosContainer.innerHTML +=
-        //     `
-        //     <div class="todo" data-id="${index}">
-        //         <p>${todo.title}</p>
-        //         <p>Due: ${todo.dueDate}</p>
-        //         <input type="button" value="Edit" class="editTodoBtn">
-        //         <input type="button" value="Delete" class="deleteTodoBtn">
-        //     </div>
-        //     `
-        //     index++;
-        
+        todayTodos.forEach(todo => {
+            todosContainer.innerHTML +=
+            `
+            <div class="todo" data-id="${index}">
+                <p>${todo.title}</p>
+                <p>Due: ${todo.dueDate}</p>
+                <input type="button" value="Edit" class="editTodoBtn">
+                <input type="button" value="Delete" class="deleteTodoBtn">
+            </div>
+            `
+            index++;
+        });
+
     }
+
+    function loadWeek(todos) {
+        let index = 0;
+        let weekTodos = todos.filter((todo) => {
+            if(isThisWeek(Date.parse(todo.dueDate))) {
+                return todo;
+            }
+        })
+        weekTodos.forEach(todo => {
+            todosContainer.innerHTML +=
+            `
+            <div class="todo" data-id="${index}">
+                <p>${todo.title}</p>
+                <p>Due: ${todo.dueDate}</p>
+                <input type="button" value="Edit" class="editTodoBtn">
+                <input type="button" value="Delete" class="deleteTodoBtn">
+            </div>
+            `
+            index++;
+        });
+
+    }
+        
+        
 
     function hideTodos() {
         todosContainer.innerHTML = "";
@@ -141,7 +167,7 @@ const UI = (() => {
     }
 
 
-    return { loadToday, loadProjectsPage, clearScreen, openNewTodoForm, closeNewTodoForm, loadHome, openEditTodo, closeEditTodo }
+    return { loadWeek, loadToday, loadProjectsPage, clearScreen, openNewTodoForm, closeNewTodoForm, loadHome, openEditTodo, closeEditTodo }
 })();
 
 export { UI }

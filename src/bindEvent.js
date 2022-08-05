@@ -1,4 +1,5 @@
 import { app } from './index.js'
+import { UI } from './UI.js';
 
 export const bindEvent = (() => {
     function newTodoForm(e) {
